@@ -1,0 +1,3 @@
+dependencies {
+    jmh 'org.graylog.jest:jest:2.4.5'
+}
