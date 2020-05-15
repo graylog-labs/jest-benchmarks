@@ -43,7 +43,7 @@ public abstract class AbstractBenchmark {
         }
 
         private void createIndex(RestHighLevelClient restClient, String index) throws IOException {
-            CreateIndexRequest request = new CreateIndexRequest("twitter");
+            CreateIndexRequest request = new CreateIndexRequest(index);
             request.settings(Settings.builder()
                     .put("index.number_of_shards", 1)
                     .put("index.number_of_replicas", 0)
