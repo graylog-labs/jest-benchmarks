@@ -20,6 +20,7 @@ public abstract class AbstractBenchmark {
     public static class ElasticClientState {
         public final String indexName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, this.getClass().getSimpleName());
         public RestHighLevelClient restClient;
+        public String type = "benchmark";
 
         public void doSetup() throws IOException {
             restClient = new RestHighLevelClient(

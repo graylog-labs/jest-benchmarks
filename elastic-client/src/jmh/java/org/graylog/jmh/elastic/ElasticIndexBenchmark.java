@@ -1,5 +1,6 @@
 package org.graylog.jmh.elastic;
 
+import org.apache.http.HttpHeaders;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -34,7 +35,7 @@ public class ElasticIndexBenchmark extends AbstractBenchmark {
     @Benchmark
     public void indexSingle(BenchmarkState state, Blackhole blackhole) throws IOException {
         final RestHighLevelClient restClient = state.restClient;
-        final IndexRequest index = new IndexRequest(state.indexName, "benchmark").source(Collections.singletonMap("test", "foobar"));
+        final IndexRequest index = new IndexRequest(state.indexName, state.type).source(Collections.singletonMap("test", "foobar"));
         final IndexResponse result = restClient.index(index, RequestOptions.DEFAULT);
         blackhole.consume(result);
     }
@@ -42,10 +43,10 @@ public class ElasticIndexBenchmark extends AbstractBenchmark {
     @Benchmark
     public void indexSingleGzip(BenchmarkState state, Blackhole blackhole) throws IOException {
         final RestHighLevelClient restClient = state.restClient;
-        final IndexRequest index = new IndexRequest(state.indexName, "benchmark").source(Collections.singletonMap("test", "foobar"));
+        final IndexRequest index = new IndexRequest(state.indexName, state.type).source(Collections.singletonMap("test", "foobar"));
         final RequestOptions.Builder requestOptions = RequestOptions.DEFAULT
                 .toBuilder();
-        requestOptions.addHeader("Accept-Encoding", "gzip,deflate");
+        requestOptions.addHeader(HttpHeaders.ACCEPT_ENCODING, "gzip");
         final IndexResponse result = restClient.index(index, requestOptions.build());
         blackhole.consume(result);
     }

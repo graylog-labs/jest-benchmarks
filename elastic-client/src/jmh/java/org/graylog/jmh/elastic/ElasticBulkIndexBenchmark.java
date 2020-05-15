@@ -16,6 +16,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class ElasticBulkIndexBenchmark extends AbstractBenchmark {
 
@@ -27,7 +28,7 @@ public class ElasticBulkIndexBenchmark extends AbstractBenchmark {
         public void doSetup() throws IOException {
             super.doSetup();
             this.bulk = new BulkRequest();
-            final IndexRequest index = new IndexRequest(indexName, "benchmark");
+            final IndexRequest index = new IndexRequest(indexName, this.type).source(Collections.singletonMap("test", "foobar"));
             for (int i = 0; i < 100_000; i++) {
                 bulk.add(index);
             }
