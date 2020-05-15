@@ -1,0 +1,6 @@
+dependencies {
+    jmh 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.8.0'
+    jmh 'org.elasticsearch.client:elasticsearch-rest-client:6.8.0'
+    jmh 'org.elasticsearch:elasticsearch:6.8.0'
+    jmh 'com.google.guava:guava:29.0-jre'
+}
