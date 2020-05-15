@@ -51,7 +51,7 @@ public class ElasticBulkIndexBenchmark extends AbstractBenchmark {
         blackhole.consume(bulkResult);
     }
 
-    @Benchmark
+    /*@Benchmark
     @BenchmarkMode(Mode.AverageTime)
     public void indexManyGzip(BulkState state, Blackhole blackhole) throws IOException {
         final RequestOptions.Builder requestOptions = RequestOptions.DEFAULT
@@ -60,5 +60,5 @@ public class ElasticBulkIndexBenchmark extends AbstractBenchmark {
         final RestHighLevelClient restClient = state.restClient;
         final BulkResponse bulkResult = restClient.bulk(state.bulk, requestOptions.build());
         blackhole.consume(bulkResult);
-    }
+    }*/
 }
